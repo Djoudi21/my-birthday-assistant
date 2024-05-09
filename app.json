@@ -28,7 +28,11 @@
     },
     "owner": "djoudi21",
     "ios": {
+      "jsEngine": "jsc",
       "bundleIdentifier": "com.djoudi21.mybirthdayassistant"
+    },
+    "android": {
+      "jsEngine": "jsc"
     }
   }
 }
