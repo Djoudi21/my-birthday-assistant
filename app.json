@@ -16,6 +16,15 @@
       ]
     ],
     "name": "my-birthday-assistant",
-    "slug": "my-birthday-assistant"
+    "slug": "my-birthday-assistant",
+    "extra": {
+      "router": {
+        "origin": "https://n"
+      },
+      "eas": {
+        "projectId": "62b3a98f-6e7b-49e2-b649-63c940267465"
+      }
+    },
+    "owner": "djoudi21"
   }
 }
