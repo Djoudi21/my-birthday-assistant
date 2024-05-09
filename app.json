@@ -1,6 +1,5 @@
 {
   "expo": {
-    "jsEngine": "hermes",
     "scheme": "acme",
     "userInterfaceStyle": "automatic",
     "orientation": "default",
@@ -29,7 +28,6 @@
     },
     "owner": "djoudi21",
     "ios": {
-      "jsEngine": "jsc",
       "bundleIdentifier": "com.djoudi21.mybirthdayassistant"
     }
   }
