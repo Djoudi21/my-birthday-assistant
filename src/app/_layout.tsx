@@ -1,5 +1,5 @@
 import "../global.css";
-import {Stack} from "expo-router";
+import {Slot, Stack} from "expo-router";
 import { ClerkProvider } from "@clerk/clerk-expo";
 import { PaperProvider } from 'react-native-paper';
 import {
@@ -10,8 +10,11 @@ import React from "react";
 
 export default function RootLayout() {
     const queryClient = new QueryClient()
+    const toto = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
+    console.log(toto)
     return (
         <QueryClientProvider client={queryClient}>
+            <ClerkProvider  publishableKey={toto}>
                 <PaperProvider>
                   <Stack
                       screenOptions={{
@@ -19,9 +22,9 @@ export default function RootLayout() {
                       }}>
                     <Stack.Screen name="login" options={{headerShown: true}} />
                     <Stack.Screen name="register" options={{headerShown: true}} />
-
                   </Stack>
                 </PaperProvider>
+            </ClerkProvider>
         </QueryClientProvider>
     )
 }
