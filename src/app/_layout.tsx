@@ -10,11 +10,8 @@ import React from "react";
 
 export default function RootLayout() {
     const queryClient = new QueryClient()
-    const toto = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY
-    console.log(toto)
     return (
         <QueryClientProvider client={queryClient}>
-            <ClerkProvider  publishableKey={toto}>
                 <PaperProvider>
                   <Stack
                       screenOptions={{
@@ -24,7 +21,6 @@ export default function RootLayout() {
                     <Stack.Screen name="register" options={{headerShown: true}} />
                   </Stack>
                 </PaperProvider>
-            </ClerkProvider>
         </QueryClientProvider>
     )
 }
