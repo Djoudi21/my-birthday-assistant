@@ -2,13 +2,10 @@ import {ContactsGateway} from "@/gateways/interfaces/contacts.gateway";
 import {CreateContactResponse, ListContactsResponse, NewContact} from "@/types";
 
 export class FetchContactsGateway implements ContactsGateway{
-    private authToolUserId: string;
+    baseUrl = process.env.EXPO_PUBLIC_BASE_URL
 
-    constructor(authToolUserId: string) {
-        this.authToolUserId = authToolUserId;
-    }
     async listContacts(): Promise<ListContactsResponse> {
-        return await fetch(`http://localhost:8080/api/v1/contacts?authToolUserId=${this.authToolUserId}`).then(res=> {
+        return await fetch(`${this.baseUrl}/api/v1/contacts`).then(res=> {
             if (!res.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -20,7 +17,7 @@ export class FetchContactsGateway implements ContactsGateway{
     }
 
     async createContact(newContact:NewContact): Promise<CreateContactResponse> {
-        return await fetch(`http://localhost:8080/api/v1/contacts?authToolUserId=${this.authToolUserId}`, {
+        return await fetch(`${this.baseUrl}/api/v1/contacts`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

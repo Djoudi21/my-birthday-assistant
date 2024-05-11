@@ -5,14 +5,14 @@ import {Controller} from "react-hook-form";
 import {useAuth} from "@/hooks/useAuth";
 
 export default function RegisterScreen() {
-    const {onPressVerify, onSignUpPress, code, onSetCode, pendingVerification, control,handleSubmit,  errors} = useAuth()
+    const {onPressVerify, onRegisterPress, code, onSetCode, pendingVerification, registerControl,registerErrors,  registerHandleSubmit} = useAuth()
 
     return (
         <SafeAreaView className={'flex-1'}>
             {!pendingVerification && (
                 <View className={'flex flex-col gap-5 p-4'}>
                     <Controller
-                        control={control}
+                        control={registerControl}
                         rules={{
                             required: true,
                         }}
@@ -27,10 +27,10 @@ export default function RegisterScreen() {
                         )}
                         name="email"
                     />
-                    {errors.email && <Text className={'text-red-700'}>This is required.</Text>}
+                    {registerErrors.email && <Text className={'text-red-700'}>This is required.</Text>}
 
                     <Controller
-                        control={control}
+                        control={registerControl}
                         rules={{
                             maxLength: 100,
                         }}
@@ -45,10 +45,10 @@ export default function RegisterScreen() {
                         )}
                         name="password"
                     />
-                    {errors.password && <Text className={'text-red-700'}>This is required.</Text>}
+                    {registerErrors.password && <Text className={'text-red-700'}>This is required.</Text>}
 
                     <Controller
-                        control={control}
+                        control={registerControl}
                         rules={{
                             required: true,
                         }}
@@ -63,10 +63,10 @@ export default function RegisterScreen() {
                         )}
                         name="firstName"
                     />
-                    {errors.firstName && <Text style={{textDecorationColor: 'red'}} className={'text-red-700'}>This is required.</Text>}
+                    {registerErrors.firstName && <Text style={{textDecorationColor: 'red'}} className={'text-red-700'}>This is required.</Text>}
 
                     <Controller
-                        control={control}
+                        control={registerControl}
                         rules={{
                             required: true,
                         }}
@@ -81,9 +81,9 @@ export default function RegisterScreen() {
                         )}
                         name="lastName"
                     />
-                    {errors.lastName && <Text className={'text-red-700'}>This is required.</Text>}
+                    {registerErrors.lastName && <Text className={'text-red-700'}>This is required.</Text>}
 
-                    <Button mode={'contained'} onPress={handleSubmit(onSignUpPress)}>Valider</Button>
+                    <Button mode={'contained'} onPress={registerHandleSubmit(onRegisterPress)}>Valider</Button>
 
                 </View>
             )}

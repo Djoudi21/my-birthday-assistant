@@ -53,7 +53,7 @@ export const usePushNotifications = (): PushNotificationState => {
             return token
 
         } else {
-            console.log('ERRROR')
+            console.log('device is not accessible')
         }
     }
 

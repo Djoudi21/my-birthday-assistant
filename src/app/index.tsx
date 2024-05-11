@@ -5,12 +5,14 @@ import {RegisterPushTokenUseCase} from "@/use-cases/tokens/registerPushTokenUseC
 import {useMutation} from "@tanstack/react-query";
 import {User} from "@/types/auth";
 import {usePushNotifications} from "@/hooks/usePushNotifications";
-import {useUser} from "@clerk/clerk-expo";
+import {useAuth, useUser} from "@clerk/clerk-expo";
+import {useEffect} from "react";
 
 export default function Index() {
   const router = useRouter();
+  const {isSignedIn } = useAuth()
+
   const {expoPushToken} = usePushNotifications()
-    const {user} = useUser()
     const registerPushToken = async ({ token, userId }) => {
         const tokensGateway = new FetchTokensGateway();
         const registerPushTokenUseCase = new RegisterPushTokenUseCase(tokensGateway);
@@ -20,6 +22,7 @@ export default function Index() {
     const addMutation = useMutation({
         mutationFn: ({ token, userId }: {token: string, userId: User['id']}) => registerPushToken({ token, userId }),
     })
+
   return (
       <SafeAreaView>
         <TouchableOpacity onPress={() => router.push('/login')}>
@@ -28,7 +31,7 @@ export default function Index() {
         <TouchableOpacity onPress={() => router.push('/register')}>
           <Text>sign up</Text>
         </TouchableOpacity>
-          <TouchableOpacity onPress={() => addMutation.mutate({token: expoPushToken?.data, userId: user.id})}><Text>Token</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => addMutation.mutate({token: expoPushToken?.data, userId: 3})}><Text>Token</Text></TouchableOpacity>
       </SafeAreaView>
   )
 }

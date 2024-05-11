@@ -1,6 +1,6 @@
 import "../global.css";
-import {Stack} from "expo-router";
-import { ClerkProvider } from "@clerk/clerk-expo";
+import {Stack, useRouter} from "expo-router";
+import {ClerkProvider, useAuth} from "@clerk/clerk-expo";
 import { PaperProvider } from 'react-native-paper';
 
 import {
@@ -10,6 +10,9 @@ import {
 
 export default function RootLayout() {
     const queryClient = new QueryClient()
+    const router = useRouter()
+
+
     return (
         <QueryClientProvider client={queryClient}>
             <ClerkProvider publishableKey={process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY}>
