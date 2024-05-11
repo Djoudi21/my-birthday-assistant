@@ -9,7 +9,7 @@ type FormData = {
     description: string
 }
 
-export default function ContactForm({onSubmit}) {
+export default function ContactForm({onSubmit, defaultValues}) {
 
     const {
         control,
@@ -17,9 +17,7 @@ export default function ContactForm({onSubmit}) {
         formState: { errors },
     } = useForm<FormData>({
         defaultValues: {
-            name: "",
-            birthday: new Date(),
-            description: ''
+            ...defaultValues,
         },
     })
 

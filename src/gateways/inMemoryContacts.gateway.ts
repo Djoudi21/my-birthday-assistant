@@ -1,5 +1,5 @@
 import {ContactsGateway} from "@/gateways/interfaces/contacts.gateway";
-import {Contact, CreateContactResponse, ListContactsResponse} from "@/types";
+import {Contact, CreateContactResponse, ListContactsResponse, UpdateContactResponse} from "@/types/contacts";
 
 export class InMemoryContactsGateway implements ContactsGateway {
     public contacts: Contact[] = [
@@ -24,5 +24,9 @@ export class InMemoryContactsGateway implements ContactsGateway {
                 contact: this.contacts[0]
             }
         });;
+    }
+
+    updateContact(contact: Contact): Promise<UpdateContactResponse> {
+        return Promise.resolve(undefined);
     }
 }

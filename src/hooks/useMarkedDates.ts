@@ -1,4 +1,4 @@
-import {Contact} from "@/types";
+import {Contact} from "@/types/contacts";
 import {format} from "date-fns";
 import {COLORS} from "@/utils/colors";
 

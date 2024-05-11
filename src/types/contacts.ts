@@ -11,7 +11,6 @@ export interface NewContact {
     description: string
 }
 
-
 export interface ListContactsResponse {
     data: {
         status: number
@@ -20,6 +19,13 @@ export interface ListContactsResponse {
 }
 
 export interface CreateContactResponse {
+    data: {
+        status: number
+        contact: Contact
+    }
+}
+
+export interface UpdateContactResponse {
     data: {
         status: number
         contact: Contact

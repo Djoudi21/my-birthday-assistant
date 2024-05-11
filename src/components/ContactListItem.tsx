@@ -13,7 +13,7 @@ export default function ContactListItem({name, birthday}: Props) {
 
     return (
         <Card className={'px-4'}>
-            <Card.Content className={'flex flex-row justify-between'}>
+            <Card.Content className={'flex w-full flex-row justify-between'}>
                 {assets && <Avatar.Image source={assets[0].uri as AvatarImageSource} />}
                 <View className={'flex flex-col justify-between w-2/3 items-end'}>
                     <Text className={'text-2xl font-semibold text-white uppercase'}>{name}</Text>

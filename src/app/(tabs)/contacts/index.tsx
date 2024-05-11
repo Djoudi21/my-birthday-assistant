@@ -1,21 +1,25 @@
-import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
+import {SafeAreaView, TouchableOpacity, View} from "react-native";
 import {FlashList} from "@shopify/flash-list";
 import ContactListItem from "@/components/ContactListItem";
 import {useRouter} from "expo-router";
 import {ActivityIndicator} from "react-native-paper";
 import {COLORS} from "@/utils/colors";
 import {useContactsQuery} from "@/hooks/useContactsQuery";
+import {Contact} from "@/types/contacts";
 
 export default function ContactsTab() {
-    const router= useRouter();
-    const {data, isPending, isError, error} = useContactsQuery()
+    const {data, isPending} = useContactsQuery()
+    const router = useRouter();
 
     if (isPending) {
         return   <ActivityIndicator animating={true} color={COLORS.primary} />
     }
 
-    if (isError) {
-        return <span>Error: {error.message}</span>
+    const handleRedirectToDetails = (item: Contact) => {
+        router.push({
+            pathname: "/contacts/contactDetailsScreen",
+            params: {id: item.id, description: item.description, name: item.name, birthday: item.birthday.toString()},
+        })
     }
 
     return (
@@ -24,11 +28,14 @@ export default function ContactsTab() {
                 <FlashList
                     contentContainerStyle={{padding: 4}}
                     data={data ?? []}
-                    renderItem={({ item }) => <TouchableOpacity className={'mb-4'} onPress={() => {
-                        router.push('/contacts/contactDetailsScreen')
-                    }}>
-                        <ContactListItem birthday={item.birthday?.toString()} name={item.name} />
-                    </TouchableOpacity>}
+                    renderItem={({ item }) => (
+                        <TouchableOpacity
+                            onPress={() => handleRedirectToDetails(item)}
+                            className={'mb-4'}
+                        >
+                            <ContactListItem birthday={item.birthday?.toString()} name={item.name} />
+                        </TouchableOpacity>
+                    )}
                     estimatedItemSize={1}
                 />
             </View>

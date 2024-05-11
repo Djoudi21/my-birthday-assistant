@@ -1,7 +1,7 @@
 import {SafeAreaView, } from "react-native";
 import React from "react";
 import ContactForm from "@/components/ContactForm";
-import {CreateContactResponse, NewContact} from "@/types";
+import {CreateContactResponse, NewContact} from "@/types/contacts";
 import {FetchContactsGateway} from "@/gateways/fetchContacts.gateway";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {CreateContactUseCase} from "@/use-cases/contacts/createContactUseCase";
@@ -38,7 +38,13 @@ export default function ContactFormScreen() {
 
     return (
         <SafeAreaView className={'flex-1 bg-white'}>
-            <ContactForm onSubmit={(data: NewContact) => addMutation.mutate(data)} />
+            <ContactForm
+                defaultValues={{
+                    name: "",
+                    birthday: new Date(),
+                    description: ''
+                }}
+                onSubmit={(data: NewContact) => addMutation.mutate(data)} />
         </SafeAreaView>
     )
 }
