@@ -1,4 +1,4 @@
-import {SafeAreaView} from "react-native";
+import {SafeAreaView, View} from "react-native";
 import {Calendar} from "react-native-calendars";
 import {useState} from "react";
 import {useMarkedDates} from "@/hooks/useMarkedDates";
@@ -14,19 +14,21 @@ export default function CalendarTab() {
 
     return (
         <SafeAreaView className={'flex justify-around h-screen overflow-y-scroll'}>
-            <Calendar
-                style={{
-                    height: '80%',
-                    width: '100%',
-                }}
-                onDayPress={day => {
-                    setSelected(day.dateString);
-                }}
-                markedDates={{
-                    ...birthdaysData,
-                    [selected]: {selected: true, selectedColor: COLORS.secondary}
-                }}
-            />
+            <View className="flex-1 bg-white pt-4">
+                <Calendar
+                    style={{
+                        height: '80%',
+                        width: '100%',
+                    }}
+                    onDayPress={day => {
+                        setSelected(day.dateString);
+                    }}
+                    markedDates={{
+                        ...birthdaysData,
+                        [selected]: {selected: true, selectedColor: COLORS.secondary}
+                    }}
+                />
+            </View>
         </SafeAreaView>
     )
 }

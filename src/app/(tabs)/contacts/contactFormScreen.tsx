@@ -36,7 +36,9 @@ export default function ContactFormScreen() {
         },
     })
 
-    return <SafeAreaView>
-        <ContactForm onSubmit={(data: NewContact) => addMutation.mutate(data)} />
-    </SafeAreaView>
+    return (
+        <SafeAreaView className={'flex-1 bg-white'}>
+            <ContactForm onSubmit={(data: NewContact) => addMutation.mutate(data)} />
+        </SafeAreaView>
+    )
 }

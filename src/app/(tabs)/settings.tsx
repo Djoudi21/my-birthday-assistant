@@ -22,13 +22,15 @@ export default function Settings() {
     };
 
     return (
-        <SafeAreaView>
-            <SignedIn>
-                <Text>You are Signed in</Text>
-                <SignOut/>
-            </SignedIn>
-            <SignedOut>
-            </SignedOut>
+        <SafeAreaView className={'flex-1 bg-white'}>
+            <View className={'flex-1'}>
+                <SignedIn>
+                    <Text>You are Signed in</Text>
+                    <SignOut/>
+                </SignedIn>
+                <SignedOut>
+                </SignedOut>
+            </View>
         </SafeAreaView>
     )
 }

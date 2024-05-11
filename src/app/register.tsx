@@ -3,14 +3,15 @@ import {SafeAreaView, TouchableOpacity, View} from "react-native";
 import {TextInput, Text, Button} from 'react-native-paper';
 import {Controller} from "react-hook-form";
 import {useAuth} from "@/hooks/useAuth";
+import AuthContentContainer from "@/components/AuthContentContainer";
 
 export default function RegisterScreen() {
     const {onPressVerify, onRegisterPress, code, onSetCode, pendingVerification, registerControl,registerErrors,  registerHandleSubmit} = useAuth()
 
     return (
-        <SafeAreaView className={'flex-1'}>
+        <SafeAreaView className={'flex-1 bg-white'}>
             {!pendingVerification && (
-                <View className={'flex flex-col gap-5 p-4'}>
+                <AuthContentContainer>
                     <Controller
                         control={registerControl}
                         rules={{
@@ -84,8 +85,7 @@ export default function RegisterScreen() {
                     {registerErrors.lastName && <Text className={'text-red-700'}>This is required.</Text>}
 
                     <Button mode={'contained'} onPress={registerHandleSubmit(onRegisterPress)}>Valider</Button>
-
-                </View>
+                </AuthContentContainer>
             )}
             {pendingVerification && (
                 <View>

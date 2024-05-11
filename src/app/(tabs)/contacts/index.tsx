@@ -1,4 +1,4 @@
-import {SafeAreaView, Text, TouchableOpacity} from "react-native";
+import {SafeAreaView, Text, TouchableOpacity, View} from "react-native";
 import {FlashList} from "@shopify/flash-list";
 import ContactListItem from "@/components/ContactListItem";
 import {useRouter} from "expo-router";
@@ -20,17 +20,18 @@ export default function ContactsTab() {
 
     return (
         <SafeAreaView className={'flex-1'} style={{flex: 1}}>
-            <FlashList
-                contentContainerStyle={{padding: 4}}
-                data={data ?? []}
-                renderItem={({ item }) => <TouchableOpacity className={'mb-4'} onPress={() => {
-                    router.push('/contacts/contactDetailsScreen')
-                }}>
-                    <ContactListItem birthday={item.birthday?.toString()} name={item.name} />
-                </TouchableOpacity>}
-                estimatedItemSize={1}
-            />
-            <Text>edfg</Text>
+            <View className="flex-1 bg-white pt-4">
+                <FlashList
+                    contentContainerStyle={{padding: 4}}
+                    data={data ?? []}
+                    renderItem={({ item }) => <TouchableOpacity className={'mb-4'} onPress={() => {
+                        router.push('/contacts/contactDetailsScreen')
+                    }}>
+                        <ContactListItem birthday={item.birthday?.toString()} name={item.name} />
+                    </TouchableOpacity>}
+                    estimatedItemSize={1}
+                />
+            </View>
         </SafeAreaView>
     )
 }

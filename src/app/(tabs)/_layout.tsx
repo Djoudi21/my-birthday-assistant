@@ -9,7 +9,7 @@ export default function TabsLayout() {
         <Tabs screenOptions={{
             tabBarActiveTintColor: 'blue',
         }}>
- {/*           <Tabs.Screen
+            <Tabs.Screen
                 name="contacts"
                 options={{
                     tabBarActiveTintColor: COLORS.primary,
@@ -19,7 +19,7 @@ export default function TabsLayout() {
                         <FontAwesome size={24} name="users" color={color} />
                     </View>,
                 }}
-            />*/}
+            />
             <Tabs.Screen
                 name="index"
                 options={{
