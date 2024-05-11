@@ -1,8 +1,25 @@
 import {SafeAreaView, Text, TouchableOpacity} from "react-native";
 import {useRouter} from "expo-router";
+import {FetchTokensGateway} from "@/gateways/fetchTokens.gateway";
+import {RegisterPushTokenUseCase} from "@/use-cases/tokens/registerPushTokenUseCase/registerPushTokenUseCase";
+import {useMutation} from "@tanstack/react-query";
+import {User} from "@/types/auth";
+import {usePushNotifications} from "@/hooks/usePushNotifications";
+import {useUser} from "@clerk/clerk-expo";
 
 export default function Index() {
   const router = useRouter();
+  const {expoPushToken} = usePushNotifications()
+    const {user} = useUser()
+    const registerPushToken = async ({ token, userId }) => {
+        const tokensGateway = new FetchTokensGateway();
+        const registerPushTokenUseCase = new RegisterPushTokenUseCase(tokensGateway);
+        await registerPushTokenUseCase.execute(token, userId);
+    };
+
+    const addMutation = useMutation({
+        mutationFn: ({ token, userId }: {token: string, userId: User['id']}) => registerPushToken({ token, userId }),
+    })
   return (
       <SafeAreaView>
         <TouchableOpacity onPress={() => router.push('/login')}>
@@ -11,6 +28,7 @@ export default function Index() {
         <TouchableOpacity onPress={() => router.push('/register')}>
           <Text>sign up</Text>
         </TouchableOpacity>
+          <TouchableOpacity onPress={() => addMutation.mutate({token: expoPushToken?.data, userId: user.id})}><Text>Token</Text></TouchableOpacity>
       </SafeAreaView>
   )
 }

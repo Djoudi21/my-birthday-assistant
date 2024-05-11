@@ -1,9 +1,9 @@
 import React from 'react';
-import {Text} from 'react-native'
+import {SafeAreaView, Text} from 'react-native'
 
 function Login() {
     return (
-        <Text>login</Text>
+        <SafeAreaView>login</SafeAreaView>
     );
 }
 
