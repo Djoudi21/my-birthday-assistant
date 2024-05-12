@@ -1,11 +1,11 @@
 import {RadioButton} from "react-native-paper";
 
-export default function LanguageSettingRadioButton({locale, onSetLocale}) {
+export default function LanguageSettingRadioButton({locale, onSetLocale, value}) {
     return (
         <RadioButton
-            value="en"
-            status={ locale === 'en' ? 'checked' : 'unchecked' }
-            onPress={() => onSetLocale('en')}
+            value={value}
+            status={ locale === value ? 'checked' : 'unchecked' }
+            onPress={() => onSetLocale(value)}
         />
     )
 }

@@ -11,16 +11,17 @@ export const useLanguageSettingModalHook = () => {
 
     const onSetLocale = (newLocale: string) => {
         setLocale(newLocale)
-        router.push('../')
     }
 
     const data = [
         {
-            countryFlag: 'us', countryLanguage: 'English', divider: true, cta: <LanguageSettingRadioButton locale={locale} onSetLocale={onSetLocale} />
+            countryFlag: 'us', countryLanguage: 'English', divider: true, cta: <LanguageSettingRadioButton
+                locale={locale} onSetLocale={onSetLocale} value={'en'} />
 
         },
         {
-            countryFlag: 'fr', countryLanguage: 'Français', divider: false, cta: <LanguageSettingRadioButton locale={locale} onSetLocale={onSetLocale} />
+            countryFlag: 'fr', countryLanguage: 'Français', divider: false, cta: <LanguageSettingRadioButton
+                locale={locale} onSetLocale={onSetLocale} value={'fr'} />
 
         }
     ]
