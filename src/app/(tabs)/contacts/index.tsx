@@ -18,7 +18,15 @@ export default function ContactsTab() {
     const handleRedirectToDetails = (item: Contact) => {
         router.push({
             pathname: "/contacts/contactDetailsScreen",
-            params: {id: item.id, description: item.description, name: item.name, birthday: item.birthday.toString()},
+            params: {
+                id: item.id,
+                description: item.description,
+                name: item.name,
+                birthday: item.birthday.toString(),
+                createdAt: item.createdAt.toString(),
+                updatedAt: item.updatedAt.toString(),
+                userId: item.userId,
+            },
         })
     }
 

@@ -3,6 +3,9 @@ export interface Contact {
     birthday: Date
     description: string
     id: number
+    createdAt: Date,
+    updatedAt: Date,
+    userId: number
 }
 
 export interface NewContact {
