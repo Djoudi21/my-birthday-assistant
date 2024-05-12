@@ -40,6 +40,10 @@ export default function RootLayout() {
                                 headerTintColor: COLORS.primary
                             }}
                         />
+                        <Stack.Screen
+                            name="modal"
+                            options={{ presentation: 'modal', gestureEnabled: true }}
+                        />
                     </Stack>
                 </PaperProvider>
             </ClerkProvider>
