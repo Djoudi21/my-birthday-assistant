@@ -13,7 +13,7 @@ export default function GroupedFlashList() {
                 <Link href={'/modal'}>
                     <View className={'flex flex-row gap-4 items-center'}>
                         <Text>English</Text>
-                        <FontAwesome name={'globe'} />
+                        <FontAwesome name={'plus'} />
                     </View>
                 </Link>)
         },
@@ -24,7 +24,7 @@ export default function GroupedFlashList() {
             title: 'title 2', type: 0
         },
         {
-            firstName: 'f', type: 1,  divider: false
+            firstName: 'f', type: 1,  divider: false, iconName: '',
         }]
     return (
         <FlashList
@@ -50,7 +50,7 @@ export default function GroupedFlashList() {
                                     {item.cta}
                                 </View>
                             </View>
-                            {item.divider && <Divider style={{color: 'black'}}/>}
+                            {item.divider && <Divider />}
                         </View>
 
                     );

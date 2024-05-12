@@ -17,7 +17,8 @@
       ],
       [
         "expo-notifications"
-      ]
+      ],
+      "expo-localization"
     ],
     "name": "my-birthday-assistant",
     "slug": "my-birthday-assistant",
