@@ -12,6 +12,10 @@ export default function Index() {
   const router = useRouter();
   const {isSignedIn } = useAuth()
 
+    useEffect(() => {
+        if (isSignedIn) router.push('/(tabs)')
+    }, [isSignedIn]);
+
   const {expoPushToken} = usePushNotifications()
     const registerPushToken = async ({ token, userId }) => {
         const tokensGateway = new FetchTokensGateway();
