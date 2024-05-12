@@ -1,10 +1,11 @@
-import {SafeAreaView, Text, View, Button} from "react-native";
-import {SignedIn, SignedOut, useAuth, useUser} from "@clerk/clerk-expo";
+import {View, Button} from "react-native";
+import {SignedOut, useAuth, useUser} from "@clerk/clerk-expo";
 import {router} from "expo-router";
 import GroupedFlashList from "@/components/GroupedFlashList";
 import {useAssets} from "expo-asset";
-import {Avatar} from 'react-native-paper'
+import {Avatar, Text} from 'react-native-paper'
 import {AvatarImageSource} from "react-native-paper/lib/typescript/components/Avatar/AvatarImage";
+import MainContainer from "@/components/MainContainer";
 
 export default function Settings() {
     const [assets] = useAssets([require('@/assets/images/avatar-svgrepo-com.svg')]);
@@ -28,7 +29,7 @@ export default function Settings() {
     };
 
     return (
-        <SafeAreaView className={'flex-1 bg-white'}>
+        <MainContainer>
             <View className={'flex-1 flex-col gap-4 justify-between'}>
                 <View className={'flex flex-col justify-center rounded-2xl gap-2 bg-white p-4 mx-2 mt-4 shadow-sm items-center'}>
                     {assets && <Avatar.Image style={{width: 50, height: 50}} source={assets[0].uri as AvatarImageSource} />}
@@ -42,6 +43,6 @@ export default function Settings() {
                     <SignedOut></SignedOut>
                 </View>
             </View>
-        </SafeAreaView>
+        </MainContainer>
     )
 }

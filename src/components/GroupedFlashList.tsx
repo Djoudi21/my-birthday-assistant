@@ -1,14 +1,16 @@
 import {FlashList} from "@shopify/flash-list";
 import {View, Text} from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import {Divider} from "react-native-paper";
-import {Link} from "expo-router";
+import {Divider, Switch} from "react-native-paper";
 import {useI18n} from "@/hooks/useI18n";
 import LanguageSettingCallToAction from "@/components/LanguageSettingCallToAction";
+import {useI18nStore} from "@/store/i18nStore";
+import {useThemeStore} from "@/store/themeStore";
 
 export default function GroupedFlashList() {
     const {i18n} = useI18n()
-
+    const isThemeDark = useThemeStore((state) => state.isThemeDark)
+    const onToggleTheme = useThemeStore((state) => state.toggleTheme)
     const data = [{
             title: 'Preferences', type: 0
         },
@@ -16,7 +18,7 @@ export default function GroupedFlashList() {
             title: `${i18n.t('language')}`, divider: true,  iconName: 'globe', type: 1, cta: (<LanguageSettingCallToAction i18n={i18n} />)
         },
         {
-            title: 'Dark mode', divider: false,  iconName: 'globe', type: 1
+            title: `${i18n.t('darkMode')}`, divider: false,  iconName: 'globe', type: 1, cta: (<Switch value={isThemeDark} onValueChange={onToggleTheme} />)
         }]
     return (
         <FlashList

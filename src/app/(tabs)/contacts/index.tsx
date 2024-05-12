@@ -6,6 +6,7 @@ import {ActivityIndicator} from "react-native-paper";
 import {COLORS} from "@/utils/colors";
 import {useContactsQuery} from "@/hooks/useContactsQuery";
 import {Contact} from "@/types/contacts";
+import MainContainer from "@/components/MainContainer";
 
 export default function ContactsTab() {
     const {data, isPending} = useContactsQuery()
@@ -31,22 +32,20 @@ export default function ContactsTab() {
     }
 
     return (
-        <SafeAreaView className={'flex-1'} style={{flex: 1}}>
-            <View className="flex-1 bg-white pt-4">
-                <FlashList
-                    contentContainerStyle={{padding: 4}}
-                    data={data ?? []}
-                    renderItem={({ item }) => (
-                        <TouchableOpacity
-                            onPress={() => handleRedirectToDetails(item)}
-                            className={'mb-4'}
-                        >
-                            <ContactListItem birthday={item.birthday?.toString()} name={item.name} />
-                        </TouchableOpacity>
-                    )}
-                    estimatedItemSize={1}
-                />
-            </View>
-        </SafeAreaView>
+        <MainContainer>
+            <FlashList
+                contentContainerStyle={{padding: 4}}
+                data={data ?? []}
+                renderItem={({ item }) => (
+                    <TouchableOpacity
+                        onPress={() => handleRedirectToDetails(item)}
+                        className={'mb-4'}
+                    >
+                        <ContactListItem birthday={item.birthday?.toString()} name={item.name} />
+                    </TouchableOpacity>
+                )}
+                estimatedItemSize={1}
+            />
+        </MainContainer>
     )
 }

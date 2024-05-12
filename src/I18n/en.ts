@@ -1,5 +1,6 @@
 export const en = {
     settings: 'Parameters',
     language: "Language",
-    preferences: 'Preferences'
+    preferences: 'Preferences',
+    darkMode: "Dark Mode",
 }
