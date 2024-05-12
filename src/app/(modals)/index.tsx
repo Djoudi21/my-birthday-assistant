@@ -1,40 +1,14 @@
-import {View, Text, SafeAreaView, StatusBar, TouchableOpacity} from "react-native";
-import {useRouter, Link} from "expo-router";
-import {Divider, RadioButton} from "react-native-paper";
+import {View, Text, SafeAreaView, TouchableOpacity} from "react-native";
+import {Link} from "expo-router";
+import {Divider} from "react-native-paper";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {FlashList} from "@shopify/flash-list";
-import ContactListItem from "@/components/ContactListItem";
 import CountryFlag from "react-native-country-flag";
-import {useState} from "react";
+import {useLanguageSettingModalHook} from "@/hooks/useLanguageSettingModalHook";
 
-export default function Modal() {
-    const router = useRouter();
-    const isPresented = router.canGoBack();
-    const [checked, setChecked] = useState('USA');
+export default function LanguageSettingModal() {
+    const {isPresented, data} = useLanguageSettingModalHook()
 
-    const data = [
-        {
-            countryFlag: 'us', countryLanguage: 'English', divider: true, cta: (
-                <RadioButton
-                    value="USA"
-                    status={ checked === 'USA' ? 'checked' : 'unchecked' }
-                    onPress={() => setChecked('USA')}
-                />
-            )
-
-        },
-        {
-            countryFlag: 'fr', countryLanguage: 'Français', divider: false, cta: (
-                <RadioButton
-                    value="France"
-                    uncheckedColor={'black'}
-                    status={ checked === 'France' ? 'checked' : 'unchecked' }
-                    onPress={() => setChecked('France')}
-                />
-            )
-
-        }
-    ]
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center' }}>
             {!isPresented && (

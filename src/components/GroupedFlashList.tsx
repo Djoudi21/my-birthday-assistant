@@ -3,28 +3,20 @@ import {View, Text} from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {Divider} from "react-native-paper";
 import {Link} from "expo-router";
+import {useI18n} from "@/hooks/useI18n";
+import LanguageSettingCallToAction from "@/components/LanguageSettingCallToAction";
 
 export default function GroupedFlashList() {
+    const {i18n} = useI18n()
+
     const data = [{
             title: 'Preferences', type: 0
         },
         {
-            title: 'Language', divider: true,  iconName: 'globe', type: 1, cta: (
-                <Link href={'/modal'}>
-                    <View className={'flex flex-row gap-4 items-center'}>
-                        <Text>English</Text>
-                        <FontAwesome name={'plus'} />
-                    </View>
-                </Link>)
+            title: `${i18n.t('language')}`, divider: true,  iconName: 'globe', type: 1, cta: (<LanguageSettingCallToAction i18n={i18n} />)
         },
         {
             title: 'Dark mode', divider: false,  iconName: 'globe', type: 1
-        },
-        {
-            title: 'title 2', type: 0
-        },
-        {
-            firstName: 'f', type: 1,  divider: false, iconName: '',
         }]
     return (
         <FlashList
@@ -43,7 +35,7 @@ export default function GroupedFlashList() {
                         <View className={'flex flex-col mx-2'}>
                             <View className={'flex flex-row justify-between my-4'}>
                                 <View className={'flex flex-row items-center gap-4'}>
-                                    <FontAwesome size={30} name={item.iconName} />
+                                    <FontAwesome size={30} name={'globe'} />
                                     <Text>{item.title}</Text>
                                 </View>
                                 <View className={'flex flex-row gap-2 items-center'}>

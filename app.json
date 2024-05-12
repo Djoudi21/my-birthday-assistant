@@ -32,7 +32,14 @@
     },
     "owner": "djoudi21",
     "ios": {
-      "bundleIdentifier": "com.djoudi21.mybirthdayassistant"
+      "bundleIdentifier": "com.djoudi21.mybirthdayassistant",
+      "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true
+      }
+    },
+    "locales": {
+      "fr": "./languages/french.json",
+      "en": "./languages/english.json"
     }
   }
 }

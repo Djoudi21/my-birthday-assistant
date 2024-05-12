@@ -1,8 +1,7 @@
 import "../global.css";
-import {Stack, useRouter} from "expo-router";
-import {ClerkProvider, useAuth} from "@clerk/clerk-expo";
+import {Stack} from "expo-router";
+import {ClerkProvider} from "@clerk/clerk-expo";
 import { PaperProvider } from 'react-native-paper';
-
 import {
     QueryClient,
     QueryClientProvider,
@@ -10,9 +9,8 @@ import {
 import {COLORS} from "@/utils/colors";
 
 export default function RootLayout() {
-    const queryClient = new QueryClient()
-    const router = useRouter()
 
+    const queryClient = new QueryClient()
 
     return (
         <QueryClientProvider client={queryClient}>
@@ -41,7 +39,7 @@ export default function RootLayout() {
                             }}
                         />
                         <Stack.Screen
-                            name="modal"
+                            name="(modals)/index"
                             options={{ presentation: 'modal', gestureEnabled: true }}
                         />
                     </Stack>
