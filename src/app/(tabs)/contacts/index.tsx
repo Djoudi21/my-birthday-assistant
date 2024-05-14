@@ -8,7 +8,7 @@ import {useContactsQuery} from "@/hooks/useContactsQuery";
 import {Contact} from "@/types/contacts";
 import MainContainer from "@/components/MainContainer";
 import SwipeableRow from "@/components/SwipableRow";
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {User} from "@/types/auth";
 import {FetchTokensGateway} from "@/gateways/fetchTokens.gateway";
 import {RegisterPushTokenUseCase} from "@/use-cases/tokens/registerPushTokenUseCase/registerPushTokenUseCase";
@@ -18,6 +18,7 @@ import {DeleteContactUseCase} from "@/use-cases/contacts/deleteContactUseCase";
 export default function ContactsTab() {
     const {data, isPending} = useContactsQuery()
     const router = useRouter();
+    const queryClient = useQueryClient()
 
     if (isPending) {
         return   <ActivityIndicator animating={true} color={COLORS.primary} />
@@ -48,6 +49,10 @@ export default function ContactsTab() {
         mutationFn: ({ contactId }: {contactId: Contact['id']}) => {
             return deleteContact({ contactId })
         },
+        onSettled: async () => {
+            return await queryClient.invalidateQueries({queryKey: ['contacts']})
+        },
+
     })
 
     const onDelete = () => {
