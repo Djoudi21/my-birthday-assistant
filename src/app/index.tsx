@@ -8,7 +8,7 @@ import {usePushNotifications} from "@/hooks/usePushNotifications";
 import {useAuth, useUser} from "@clerk/clerk-expo";
 import {useEffect} from "react";
 
-export default function Index() {
+export default function Home() {
   const router = useRouter();
   const {isSignedIn } = useAuth()
 

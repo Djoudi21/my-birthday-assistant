@@ -1,60 +1,57 @@
 import {FlashList} from "@shopify/flash-list";
 import {View, Text} from "react-native";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import {Divider, Switch} from "react-native-paper";
+import {Switch} from "react-native-paper";
 import {useI18n} from "@/hooks/useI18n";
 import LanguageSettingCallToAction from "@/components/LanguageSettingCallToAction";
-import {useI18nStore} from "@/store/i18nStore";
 import {useThemeStore} from "@/store/themeStore";
+import BoxedIcon from "@/components/BoxedIcon";
+import {COLORS} from "@/utils/colors";
+import LogOutButton from "@/components/LogOutButton";
+import {Entypo, Ionicons} from "@expo/vector-icons";
+import {ReactNode} from "react";
+
+export type SettingsList = {title: string, iconName: typeof Entypo.defaultProps |  typeof Ionicons.defaultProps, iconLibrary: 'entypo' | 'ionicons', cta: ReactNode, iconBgColor: string}[][]
 
 export default function GroupedFlashList() {
     const {i18n} = useI18n()
     const isThemeDark = useThemeStore((state) => state.isThemeDark)
     const onToggleTheme = useThemeStore((state) => state.toggleTheme)
-    const data = [{
-            title: 'Preferences', type: 0
-        },
-        {
-            title: `${i18n.t('language')}`, divider: true,  iconName: 'globe', type: 1, cta: (<LanguageSettingCallToAction i18n={i18n} />)
-        },
-        {
-            title: `${i18n.t('darkMode')}`, divider: false,  iconName: 'globe', type: 1, cta: (<Switch value={isThemeDark} onValueChange={onToggleTheme} />)
-        }]
+    const data: SettingsList = [
+        [
+            {title: `${i18n.t('language')}`,  iconName: 'globe', iconLibrary: 'entypo', cta: (<LanguageSettingCallToAction i18n={i18n} />), iconBgColor: `bg-[${COLORS.secondary}]`},
+            {title: `${i18n.t('darkMode')}`,  iconName: 'color-palette', iconLibrary:'ionicons',  cta: (<Switch value={isThemeDark} onValueChange={onToggleTheme} />), iconBgColor: `bg-[${COLORS.primary}]`}
+        ],
+        [
+            {title: ``,  iconName: 'log-out', iconLibrary: 'entypo', iconBgColor: `bg-[black]`, cta: (<LogOutButton />)},
+        ]
+    ]
     return (
-        <FlashList
-            data={data}
-            renderItem={({ item }) => {
-                if (item.type === 0) {
-                    // Rendering header
+        <View className={'h-full px-2'}>
+            <FlashList
+                data={data}
+                renderItem={({ item }) => {
                     return (
-                        <View className={`bg-[#512da8] items-start justify-end my-4 h-12`}>
-                            <Text className={'text-white ml-2 mb-1 text-2xl'}>{item.title}</Text>
-                        </View>
+                        <FlashList
+                            ItemSeparatorComponent={() => <Text style={{backgroundColor: 'grey', height: 1, width: '85%', alignSelf: 'center'}} />}
+                            data={item}
+                            className={'h-full bg-white rounded-2xl mb-4'}
+                            estimatedItemSize={3}
+                            scrollEnabled={false}
+                            renderItem={(item) => {
+                                return (
+                                    <View className={'flex w-full flex-col px-4'}>
+                                        <View className={'flex flex-row justify-between items-center my-4'}>
+                                            <BoxedIcon iconLibrary={item.item.iconLibrary} iconName={item.item.iconName} title={item.item.title} backgroundColor={item.item.iconBgColor} />
+                                            {item.item.cta}
+                                        </View>
+                                    </View>
+                                )
+                            }}
+                        />
                     );
-                } else {
-                    // Render item
-                    return (
-                        <View className={'flex flex-col mx-2'}>
-                            <View className={'flex flex-row justify-between my-4'}>
-                                <View className={'flex flex-row items-center gap-4'}>
-                                    <FontAwesome size={30} name={'globe'} />
-                                    <Text>{item.title}</Text>
-                                </View>
-                                <View className={'flex flex-row gap-2 items-center'}>
-                                    {item.cta}
-                                </View>
-                            </View>
-                            {item.divider && <Divider />}
-                        </View>
-
-                    );
-                }
-            }}
-            getItemType={(item) => {
-                // To achieve better performance, specify the type based on the item
-                return item.type === 0 ? "sectionHeader": "row";
-            }}
-            estimatedItemSize={100}
-        />
+                }}
+                estimatedItemSize={100}
+            />
+        </View>
     )
 }

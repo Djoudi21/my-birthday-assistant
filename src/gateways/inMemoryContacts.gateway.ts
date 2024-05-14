@@ -3,8 +3,8 @@ import {Contact, CreateContactResponse, ListContactsResponse, UpdateContactRespo
 
 export class InMemoryContactsGateway implements ContactsGateway {
     public contacts: Contact[] = [
-        {name: 'ABDEqsdqsdLqe', birthday: new Date(), id: 1, description: 'zaer'},
-        {name: 'sdf', birthday: new Date(), id: 2, description: 'zaer'},
+        {name: 'ABDEqsdqsdLqe', birthday: new Date(), id: 1, description: 'zaer', createdAt: new Date(), updatedAt: new Date(), userId: 1},
+        {name: 'xcv', birthday: new Date(), id: 2, description: 'zaer', createdAt: new Date(), updatedAt: new Date(), userId: 1},
     ];
 
     listContacts(): Promise<ListContactsResponse> {
@@ -23,7 +23,7 @@ export class InMemoryContactsGateway implements ContactsGateway {
                 status: 200,
                 contact: this.contacts[0]
             }
-        });;
+        });
     }
 
     updateContact(contact: Contact): Promise<UpdateContactResponse> {

@@ -2,8 +2,10 @@ import {Tabs} from "expo-router";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import {View} from "react-native";
 import {COLORS} from "@/utils/colors";
+import {useI18n} from "@/hooks/useI18n";
 
 export default function TabsLayout() {
+    const {i18n} = useI18n()
 
     return (
         <Tabs screenOptions={{
@@ -15,6 +17,7 @@ export default function TabsLayout() {
                     tabBarActiveTintColor: COLORS.primary,
                     headerShown: false,
                     tabBarLabel: "",
+                    headerTitle: `${i18n.t('contactsPageTitle')}`,
                     tabBarIcon: ({ color }) => <View className={'pt-2'}>
                         <FontAwesome size={24} name="users" color={color} />
                     </View>,
@@ -25,6 +28,7 @@ export default function TabsLayout() {
                 options={{
                     tabBarActiveTintColor: COLORS.primary,
                     tabBarLabel: "",
+                    headerTitle: `${i18n.t('calendarPageTitle')}`,
                     tabBarIcon: ({ color }) =>
                         <View className={'pt-2'}>
                             <FontAwesome size={24} name="calendar" color={color} />
@@ -36,6 +40,7 @@ export default function TabsLayout() {
                 options={{
                     tabBarActiveTintColor: COLORS.primary,
                     tabBarLabel: "",
+                    headerShown: false,
                     tabBarIcon: ({ color }) =>
                         <View className={'pt-2'}>
                             <FontAwesome size={24} name="cog" color={color} />
