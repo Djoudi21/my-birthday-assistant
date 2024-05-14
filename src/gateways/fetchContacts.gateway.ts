@@ -1,7 +1,7 @@
 import {ContactsGateway} from "@/gateways/interfaces/contacts.gateway";
 import {
     Contact,
-    CreateContactResponse,
+    CreateContactResponse, DeleteContactResponse,
     ListContactsResponse,
     NewContact,
     UpdateContactResponse
@@ -51,6 +51,20 @@ export class FetchContactsGateway implements ContactsGateway{
             body: JSON.stringify({
                 data: {...contact }
             })
+        }).then(res => {
+            if (!res.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return res.json();
+        }).catch(error => {
+            // Handle any errors that occurred during the fetch
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    async deleteContact(contactId: Contact['id']): Promise<DeleteContactResponse> {
+        return await fetch(`${this.baseUrl}/api/v1/contacts/${contactId}`, {
+            method: 'DELETE'
         }).then(res => {
             if (!res.ok) {
                 throw new Error('Network response was not ok');

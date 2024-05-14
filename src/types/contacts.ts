@@ -34,3 +34,10 @@ export interface UpdateContactResponse {
         contact: Contact
     }
 }
+
+export interface DeleteContactResponse {
+    data: {
+        status: number
+        contact: Contact | undefined
+    }
+}

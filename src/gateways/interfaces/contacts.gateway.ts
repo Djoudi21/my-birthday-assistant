@@ -3,11 +3,12 @@ import type {
     CreateContactResponse,
     NewContact,
     UpdateContactResponse,
-    Contact
+    Contact, DeleteContactResponse
 } from "@/types/contacts";
 
 export interface ContactsGateway {
     listContacts(): Promise<ListContactsResponse>;
     createContact(newContact: NewContact): Promise<CreateContactResponse>;
     updateContact(contact: Contact): Promise<UpdateContactResponse>;
+    deleteContact(contactId: Contact['id']): Promise<DeleteContactResponse>;
 }

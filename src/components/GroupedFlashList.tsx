@@ -10,7 +10,7 @@ import LogOutButton from "@/components/LogOutButton";
 import {Entypo, Ionicons} from "@expo/vector-icons";
 import {ReactNode} from "react";
 
-export type SettingsList = {title: string, iconName: typeof Entypo.defaultProps |  typeof Ionicons.defaultProps, iconLibrary: 'entypo' | 'ionicons', cta: ReactNode, iconBgColor: string}[][]
+export type SettingsList = {title: string, iconName: typeof Entypo.defaultProps |  typeof Ionicons.defaultProps, iconLibrary: 'entypo' | 'ionicons' | 'materialCommunityIcons', cta: ReactNode, iconBgColor: string}[][]
 
 export default function GroupedFlashList() {
     const {i18n} = useI18n()
@@ -19,7 +19,7 @@ export default function GroupedFlashList() {
     const data: SettingsList = [
         [
             {title: `${i18n.t('language')}`,  iconName: 'globe', iconLibrary: 'entypo', cta: (<LanguageSettingCallToAction i18n={i18n} />), iconBgColor: `bg-[${COLORS.secondary}]`},
-            {title: `${i18n.t('darkMode')}`,  iconName: 'color-palette', iconLibrary:'ionicons',  cta: (<Switch value={isThemeDark} onValueChange={onToggleTheme} />), iconBgColor: `bg-[${COLORS.primary}]`}
+            {title: `${i18n.t('darkMode')}`,  iconName: 'theme-light-dark', iconLibrary:'materialCommunityIcons',  cta: (<Switch value={isThemeDark} onValueChange={onToggleTheme} />), iconBgColor: `bg-[${COLORS.primary}]`}
         ],
         [
             {title: ``,  iconName: 'log-out', iconLibrary: 'entypo', iconBgColor: `bg-[black]`, cta: (<LogOutButton />)},
